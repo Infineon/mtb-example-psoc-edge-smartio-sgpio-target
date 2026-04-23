@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration app="BACKEND" formatVersion="15" lastSavedWith="Configurator Backend" lastSavedWithVersion="3.60.0" toolsPackage="ModusToolbox 3.6.0" xmlns="http://cypress.com/xsd/cydesignfile_v6">
+<Configuration app="BACKEND" formatVersion="15" lastSavedWith="Configurator Backend" lastSavedWithVersion="3.70.0" toolsPackage="ModusToolbox 3.7.0" xmlns="http://cypress.com/xsd/cydesignfile_v7">
     <Devices>
         <Device mpn="PSE846GPS4DBZC4A">
             <BlockConfig>
@@ -31,16 +31,6 @@
                 <Block location="ioss[0].port[1].pin[7]">
                     <Aliases>
                         <Alias value="CYBSP_OSPI_D7"/>
-                    </Aliases>
-                </Block>
-                <Block location="ioss[0].port[3].pin[0]">
-                    <Aliases>
-                        <Alias value="CYBSP_I3C_SCL"/>
-                    </Aliases>
-                </Block>
-                <Block location="ioss[0].port[3].pin[1]">
-                    <Aliases>
-                        <Alias value="CYBSP_I3C_SDA"/>
                     </Aliases>
                 </Block>
                 <Block location="ioss[0].port[5].pin[0]">
@@ -92,6 +82,7 @@
                 <Block location="ioss[0].port[8].pin[4]">
                     <Aliases>
                         <Alias value="CYBSP_I2C_INT_2"/>
+                        <Alias value="CYBSP_MAG_INT"/>
                     </Aliases>
                 </Block>
                 <Block location="ioss[0].port[9].pin[1]">
@@ -162,6 +153,7 @@
                     <Aliases>
                         <Alias value="CYBSP_ARD_D2"/>
                         <Alias value="CYBSP_DAC_1"/>
+                        <Alias value="CYBSP_ETH_MDIO"/>
                     </Aliases>
                 </Block>
                 <Block location="ioss[0].port[13].pin[7]">
@@ -331,8 +323,61 @@
                 <Block location="ioss[0].port[21].pin[7]">
                     <Aliases>
                         <Alias value="CYBSP_I2C_INT1"/>
+                        <Alias value="CYBSP_IMU_INT1"/>
                     </Aliases>
                 </Block>
+                <Personality template="mxi3c" version="1.0" instance="ckbUNHh80qA">
+                    <Block location="i3c[0]" locked="true">
+                        <Aliases>
+                            <Alias value="CYBSP_I3C_CONTROLLER"/>
+                        </Aliases>
+                    </Block>
+                    <Parameters>
+                        <Param id="AdaptiveI2C" value="true"/>
+                        <Param id="BusAvailTime" value="125"/>
+                        <Param id="BusFreeTime" value="32"/>
+                        <Param id="BusIdleTime" value="25000"/>
+                        <Param id="CommandQueueThreshold" value="1"/>
+                        <Param id="DataRate" value="400"/>
+                        <Param id="DevRoleCap" value="I3C_TARGET_ONLY"/>
+                        <Param id="DeviceCharVal" value="0x69"/>
+                        <Param id="DynamicAddress" value="8"/>
+                        <Param id="ExtLowCnt1" value="11"/>
+                        <Param id="ExtLowCnt2" value="16"/>
+                        <Param id="ExtLowCnt3" value="27"/>
+                        <Param id="ExtLowCnt4" value="58"/>
+                        <Param id="ExtTerminationLowCnt" value="0"/>
+                        <Param id="HDRCap" value="true"/>
+                        <Param id="HotJoinControl" value="false"/>
+                        <Param id="HotJoinIntrEnable" value="true"/>
+                        <Param id="I2CFMHighCount" value="100"/>
+                        <Param id="I2CFMLowCount" value="212"/>
+                        <Param id="I2CFMPlusHighCount" value="45"/>
+                        <Param id="I2CFMPlusLowCount" value="80"/>
+                        <Param id="I3CBusMode" value="CY_I3C_BUS_PURE"/>
+                        <Param id="IBA" value="false"/>
+                        <Param id="IBIDataThreshold" value="15"/>
+                        <Param id="IBIQueueThreshold" value="0"/>
+                        <Param id="ManualDataRateCtrl" value="false"/>
+                        <Param id="MaxDataSpeedLim" value="true"/>
+                        <Param id="ModeUser" value="CY_I3C_CONTROLLER"/>
+                        <Param id="OpenDrainDataRate" value="4000"/>
+                        <Param id="OpenDrainHighCount" value="5"/>
+                        <Param id="OpenDrainLowCount" value="27"/>
+                        <Param id="ProvisionalID" value="0x112233445566"/>
+                        <Param id="PushPullDataRate" value="12500"/>
+                        <Param id="PushPullHighCount" value="5"/>
+                        <Param id="PushPullLowCount" value="5"/>
+                        <Param id="RXBufferStartThreshold" value="CY_I3C_1_WORD_DEPTH"/>
+                        <Param id="RXBufferThreshold" value="CY_I3C_1_WORD_DEPTH"/>
+                        <Param id="ResponseQueueThreshold" value="0"/>
+                        <Param id="SDAHoldTime" value="1"/>
+                        <Param id="StaticAddr" value="0x63"/>
+                        <Param id="TXBufferStartThreshold" value="CY_I3C_1_WORD_DEPTH"/>
+                        <Param id="TXBufferThreshold" value="CY_I3C_1_WORD_DEPTH"/>
+                        <Param id="inFlash" value="true"/>
+                    </Parameters>
+                </Personality>
                 <Personality template="pin" version="3.0" instance="JTdAzGPy8fw">
                     <Block location="ioss[0].port[0].pin[1]" locked="true">
                         <Aliases>
@@ -342,16 +387,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_STRONG_IN_OFF"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="dweDM4IKPvY">
@@ -364,16 +405,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_STRONG"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="XvywJi05an8">
@@ -386,16 +423,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_STRONG"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="dPe-5Ob_JZA">
@@ -408,16 +441,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_STRONG"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="o5IX06-kV_Y">
@@ -430,16 +459,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_STRONG"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="bTZo4qYd5LE">
@@ -451,16 +476,48 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_STRONG_IN_OFF"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
+                        <Param id="extended_drive_sel" value="false"/>
+                        <Param id="inFlash" value="true"/>
+                        <Param id="initialState" value="1"/>
+                        <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
+                        <Param id="nonSec" value="1"/>
+                        <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
+                    </Parameters>
+                </Personality>
+                <Personality template="pin" version="3.0" instance="j4SanU59DWA">
+                    <Block location="ioss[0].port[3].pin[0]" locked="true">
+                        <Aliases>
+                            <Alias value="CYBSP_I3C_SCL"/>
+                        </Aliases>
+                    </Block>
+                    <Parameters>
+                        <Param id="DriveModes" value="CY_GPIO_DM_CFGOUT3_STRONG_PULLUP_HIGHZ"/>
+                        <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
                         <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
+                    </Parameters>
+                </Personality>
+                <Personality template="pin" version="3.0" instance="uf_mJzzvX70">
+                    <Block location="ioss[0].port[3].pin[1]" locked="true">
+                        <Aliases>
+                            <Alias value="CYBSP_I3C_SDA"/>
+                        </Aliases>
+                    </Block>
+                    <Parameters>
+                        <Param id="DriveModes" value="CY_GPIO_DM_CFGOUT3_STRONG_PULLUP_HIGHZ"/>
+                        <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
+                        <Param id="extended_drive_sel" value="false"/>
+                        <Param id="inFlash" value="true"/>
+                        <Param id="initialState" value="1"/>
+                        <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
+                        <Param id="nonSec" value="1"/>
+                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
+                        <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="hTTDt325DXk">
@@ -472,16 +529,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_STRONG"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="J38bvGDKNag">
@@ -493,16 +546,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_STRONG"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="3p-MQnOnO-g">
@@ -514,16 +563,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_STRONG"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="bDe5hwN5RC0">
@@ -535,16 +580,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_STRONG"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="f3jwYLfhDBA">
@@ -556,16 +597,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_STRONG"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="tKahTiRoahQ">
@@ -577,16 +614,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_STRONG"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="B1bOE4e5e3w">
@@ -598,16 +631,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_STRONG"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="R6SBIXkMMMU">
@@ -619,16 +648,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_STRONG"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="CG2jcZimeFg">
@@ -640,16 +665,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_HIGHZ"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="wRfpkcvUcRI">
@@ -661,16 +682,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_STRONG_IN_OFF"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="X8CGCZbQKPI">
@@ -682,16 +699,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_STRONG"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="A_T2x2bHqHA">
@@ -703,16 +716,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_STRONG"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="x8T9aXyZ0Ng">
@@ -724,16 +733,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_STRONG"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="bua_UQvXLe0">
@@ -745,16 +750,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_ANALOG"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="nfVtyK5Waz4">
@@ -766,16 +767,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_STRONG"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="YkVvqcO3Q5A">
@@ -787,16 +784,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_STRONG"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="DelFRuKRJXo">
@@ -808,16 +801,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_STRONG"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="qEEHOHkWtcY">
@@ -829,16 +818,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_OD_DRIVESLOW"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="KG9RiFS21GY">
@@ -850,16 +835,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_OD_DRIVESLOW"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="Ws84J0ZSvc4">
@@ -873,16 +854,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_PULLUP"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_FALLING"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="kyK9mcsvWGg">
@@ -894,16 +871,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_STRONG_IN_OFF"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="S0sHHVqTiSM">
@@ -915,16 +888,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_HIGHZ"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="fdSv3TP-dNc">
@@ -937,16 +906,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_PULLUP"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_FALLING"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="BKeqqb7An2s">
@@ -958,16 +923,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_STRONG_IN_OFF"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="KqwUtk44Rj8">
@@ -979,79 +940,66 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_STRONG_IN_OFF"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="z-Nxbt8Ei1g">
                     <Block location="ioss[0].port[10].pin[0]" locked="true">
                         <Aliases>
                             <Alias value="CYBSP_BT_UART_RX"/>
+                            <Alias value="CYBSP_ETH_TXD_3"/>
                         </Aliases>
                     </Block>
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_HIGHZ"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="fD7SDJVBVJ4">
                     <Block location="ioss[0].port[10].pin[1]" locked="true">
                         <Aliases>
                             <Alias value="CYBSP_BT_UART_TX"/>
+                            <Alias value="CYBSP_ETH_RX_CLK"/>
                         </Aliases>
                     </Block>
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_STRONG_IN_OFF"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="iBWwaxbDAbM">
                     <Block location="ioss[0].port[10].pin[2]" locked="true">
                         <Aliases>
                             <Alias value="CYBSP_BT_UART_CTS"/>
+                            <Alias value="CYBSP_ETH_TX_ER"/>
                         </Aliases>
                     </Block>
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_HIGHZ"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="0"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="SI8YQUa1y18">
@@ -1063,82 +1011,69 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_STRONG_IN_OFF"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="0"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="aGoDcpFgw1M">
                     <Block location="ioss[0].port[10].pin[4]" locked="true">
                         <Aliases>
                             <Alias value="CYBSP_BT_HOST_WAKE"/>
+                            <Alias value="CYBSP_ETH_RXD_3"/>
                         </Aliases>
                     </Block>
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_HIGHZ"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="0"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="HSkqCsUBSkM">
                     <Block location="ioss[0].port[10].pin[6]" locked="true">
                         <Aliases>
                             <Alias value="CYBSP_BT_DEVICE_WAKE"/>
+                            <Alias value="CYBSP_ETH_RXD_0"/>
                         </Aliases>
                     </Block>
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_STRONG"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="0"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="Go5u_bcZBRE">
                     <Block location="ioss[0].port[11].pin[0]" locked="true">
                         <Aliases>
                             <Alias value="CYBSP_BT_POWER"/>
+                            <Alias value="CYBSP_ETH_RXD_2"/>
                         </Aliases>
                     </Block>
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_PULLUP"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
-                <Personality template="pin" version="3.0" instance="eII469FKIog">
+                <Personality template="pin" version="3.0" instance="9ZyuveQ9SdY">
                     <Block location="ioss[0].port[11].pin[1]" locked="true">
                         <Aliases>
                             <Alias value="CYBSP_ARD_D7"/>
@@ -1148,19 +1083,15 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_HIGHZ"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
-                <Personality template="pin" version="3.0" instance="1s3raeZSr6c">
+                <Personality template="pin" version="3.0" instance="hh0rlwXbI0s">
                     <Block location="ioss[0].port[11].pin[2]" locked="true">
                         <Aliases>
                             <Alias value="CYBSP_BT_DEV_WAKE"/>
@@ -1170,16 +1101,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_ANALOG"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="KA7zigb4ZrQ">
@@ -1187,63 +1114,54 @@
                         <Aliases>
                             <Alias value="CYBSP_SMART_IO_OUTPUT"/>
                             <Alias value="CYBSP_ARD_D3"/>
+                            <Alias value="CYBSP_ETH_TXD_1"/>
                         </Aliases>
                     </Block>
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_HIGHZ"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="3U7Pe3zES34">
                     <Block location="ioss[0].port[11].pin[4]" locked="true">
                         <Aliases>
                             <Alias value="CYBSP_WIFI_HOST_WAKE"/>
+                            <Alias value="CYBSP_ETH_TX_CTL"/>
                         </Aliases>
                     </Block>
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_OD_DRIVESLOW"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
-                        <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
+                        <Param id="isrTrigger" value="CY_GPIO_INTR_RISING"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="X3kuN50rOfM">
                     <Block location="ioss[0].port[11].pin[6]" locked="true">
                         <Aliases>
                             <Alias value="CYBSP_WIFI_WL_REG_ON"/>
+                            <Alias value="CYBSP_ETH_TXD_2"/>
                         </Aliases>
                     </Block>
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_OD_DRIVESLOW"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="smartio" version="4.0" instance="H_8WdIVWBZE">
@@ -1348,16 +1266,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_STRONG"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="zJz2kayPJCQ">
@@ -1369,16 +1283,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_STRONG"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="9Ev6-wi0JsM">
@@ -1390,16 +1300,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_STRONG"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="-D6s3XKkrKs">
@@ -1411,16 +1317,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_STRONG_IN_OFF"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="vJzwPSIB_WQ">
@@ -1432,16 +1334,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_STRONG"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="xWTSaZY3MDU">
@@ -1453,16 +1351,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_STRONG"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="3Vo0VoIjswE">
@@ -1474,16 +1368,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_ANALOG"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="2qlj6Vi119g">
@@ -1495,16 +1385,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_STRONG_IN_OFF"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="d0QrcrPY4Lg">
@@ -1516,16 +1402,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_STRONG_IN_OFF"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="WxElNzr7PgE">
@@ -1537,16 +1419,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_HIGHZ"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="PF4RXA_L4Zo">
@@ -1558,16 +1436,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_STRONG_IN_OFF"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="EFWuidgYc2E">
@@ -1580,16 +1454,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_STRONG_IN_OFF"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="0"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="DJg85Hxynmc">
@@ -1602,16 +1472,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_STRONG"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="0"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="pKiuTsnWR_Y">
@@ -1625,16 +1491,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_STRONG"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="0"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="bJvo-mnHrEw">
@@ -1646,16 +1508,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_OD_DRIVESLOW"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="HRi0BF6rmYs">
@@ -1667,16 +1525,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_OD_DRIVESLOW"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="cX90zS8NdCI">
@@ -1688,16 +1542,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_PULLUP"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="0"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="ECQVbypk2L8">
@@ -1708,17 +1558,9 @@
                     </Block>
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_ANALOG"/>
-                        <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
-                        <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
-                        <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
-                        <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="AP03uvWLw3E">
@@ -1729,17 +1571,9 @@
                     </Block>
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_ANALOG"/>
-                        <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
-                        <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
-                        <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
-                        <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="3cq45SmNLGo">
@@ -1750,17 +1584,9 @@
                     </Block>
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_ANALOG"/>
-                        <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
-                        <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
-                        <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
-                        <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="4v-FbO1ghg0">
@@ -1771,17 +1597,9 @@
                     </Block>
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_ANALOG"/>
-                        <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
-                        <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
-                        <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
-                        <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="U7_5kT2tpJ8">
@@ -1793,16 +1611,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_STRONG_IN_OFF"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="tNmBjjyVQKg">
@@ -1814,16 +1628,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_STRONG"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="_w7PXUE-kuo">
@@ -1835,16 +1645,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_STRONG_IN_OFF"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="Nm6zQNr_dRs">
@@ -1856,16 +1662,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_STRONG_IN_OFF"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pin" version="3.0" instance="ahrg5zDClm0">
@@ -1877,16 +1679,12 @@
                     <Parameters>
                         <Param id="DriveModes" value="CY_GPIO_DM_STRONG_IN_OFF"/>
                         <Param id="driveStrength" value="CY_GPIO_DRIVE_1_2"/>
-                        <Param id="driveStrengthTrim" value="CY_GPIO_DRIVE_STRENGTH_DEFAULT"/>
                         <Param id="extended_drive_sel" value="false"/>
                         <Param id="inFlash" value="true"/>
                         <Param id="initialState" value="1"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="nonSec" value="1"/>
-                        <Param id="pullUpRes" value="CY_GPIO_PULLUP_RES_DISABLE"/>
-                        <Param id="sioOutputBuffer" value="true"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
-                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
                 <Personality template="protection_sau" version="1.0" instance="KuXzqOfm0ZU">
@@ -1931,8 +1729,8 @@
                     <Block location="m55appcpuss[0].cm55[0].mpu_ns[0]" locked="true"/>
                     <Parameters>
                         <Param id="base_addr1" value="0x240FD000"/>
-                        <Param id="base_addr2" value="0x262FE000"/>
-                        <Param id="base_addr3" value="0x2633E000"/>
+                        <Param id="base_addr2" value="0x262FC000"/>
+                        <Param id="base_addr3" value="0x2633C000"/>
                         <Param id="cacheable0" value="4"/>
                         <Param id="cacheable1" value="4"/>
                         <Param id="cacheable2" value="4"/>
@@ -1971,9 +1769,12 @@
                         <Param id="privileged1" value="false"/>
                         <Param id="privileged2" value="false"/>
                         <Param id="privileged3" value="false"/>
+                        <Param id="shareable1" value="false"/>
+                        <Param id="shareable2" value="false"/>
+                        <Param id="shareable3" value="false"/>
                         <Param id="size1" value="0x00003000"/>
                         <Param id="size2" value="0x00040000"/>
-                        <Param id="size3" value="0x001C2000"/>
+                        <Param id="size3" value="0x001C4000"/>
                         <Param id="writable1" value="true"/>
                         <Param id="writable2" value="true"/>
                         <Param id="writable3" value="true"/>
@@ -2303,7 +2104,12 @@
                         <Param id="is_receiver_3_used" value="true"/>
                         <Param id="is_receiver_4_used" value="false"/>
                         <Param id="is_receiver_5_used" value="false"/>
-                        <Param id="routeCtl" value="4"/>
+                        <Param id="routeCtl_0_1_int1" value="0"/>
+                        <Param id="routeCtl_0_1_int2" value="1"/>
+                        <Param id="routeCtl_2_3_int1" value="0"/>
+                        <Param id="routeCtl_2_3_int2" value="4"/>
+                        <Param id="routeCtl_4_5_int1" value="0"/>
+                        <Param id="routeCtl_4_5_int2" value="16"/>
                         <Param id="rxDmaTrigger" value="false"/>
                         <Param id="rxFifoTriggerLevel_0" value="10"/>
                         <Param id="rxFifoTriggerLevel_1" value="10"/>
@@ -2341,103 +2147,95 @@
                         <Param id="wordSize_7" value="CY_PDM_PCM_WSIZE_16_BIT"/>
                     </Parameters>
                 </Personality>
-                <Personality template="pclk_v2" version="1.0" instance="E5ESJtxKQgk">
+                <Personality template="pclk_v2" version="1.1" instance="E5ESJtxKQgk">
                     <Block location="peri[0].group[1].div_8[0]" locked="true">
                         <Aliases>
                             <Alias value="CYBSP_EZ_I2C_TARGET_CLK_DIV"/>
                         </Aliases>
                     </Block>
                     <Parameters>
-                        <Param id="fracDivider" value="0"/>
                         <Param id="intDivider" value="7"/>
                         <Param id="startOnReset" value="true"/>
                     </Parameters>
                 </Personality>
-                <Personality template="pclk_v2" version="1.0" instance="-KJIh42hMXA">
+                <Personality template="pclk_v2" version="1.1" instance="-KJIh42hMXA">
                     <Block location="peri[0].group[1].div_8[1]" locked="true">
                         <Aliases>
                             <Alias value="CYBSP_SPI_CONTROLLER_CLK_DIV"/>
                         </Aliases>
                     </Block>
                     <Parameters>
-                        <Param id="fracDivider" value="0"/>
                         <Param id="intDivider" value="100"/>
                         <Param id="startOnReset" value="true"/>
                     </Parameters>
                 </Personality>
-                <Personality template="pclk_v2" version="1.0" instance="74FALe490Is">
+                <Personality template="pclk_v2" version="1.1" instance="74FALe490Is">
                     <Block location="peri[0].group[1].div_8[2]" locked="true">
                         <Aliases>
                             <Alias value="CYBSP_USB_OS_TIMER_CLK_DIV"/>
                         </Aliases>
                     </Block>
                     <Parameters>
-                        <Param id="fracDivider" value="0"/>
                         <Param id="intDivider" value="1"/>
                         <Param id="startOnReset" value="true"/>
                     </Parameters>
                 </Personality>
-                <Personality template="pclk_v2" version="1.0" instance="72QnHf3r67A">
+                <Personality template="pclk_v2" version="1.1" instance="72QnHf3r67A">
                     <Block location="peri[0].group[1].div_8[3]" locked="true">
                         <Aliases>
-                            <Alias value="SGPIO_TARGET_SPI_CLK_DIV"/>
+                            <Alias value="CYBSP_PWM_DT_CLK_DIV"/>
                         </Aliases>
                     </Block>
                     <Parameters>
-                        <Param id="fracDivider" value="0"/>
                         <Param id="intDivider" value="15"/>
                         <Param id="startOnReset" value="true"/>
                     </Parameters>
                 </Personality>
-                <Personality template="pclk_v2" version="1.0" instance="SnXZ_ZAruzg">
+                <Personality template="pclk_v2" version="1.1" instance="SnXZ_ZAruzg">
                     <Block location="peri[0].group[1].div_16[0]" locked="true">
                         <Aliases>
                             <Alias value="CYBSP_I2C_CONTROLLER_CLK_DIV"/>
                         </Aliases>
                     </Block>
                     <Parameters>
-                        <Param id="fracDivider" value="0"/>
                         <Param id="intDivider" value="10"/>
                         <Param id="startOnReset" value="true"/>
                     </Parameters>
                 </Personality>
-                <Personality template="pclk_v2" version="1.0" instance="r7obuVjoVXM">
+                <Personality template="pclk_v2" version="1.1" instance="r7obuVjoVXM">
                     <Block location="peri[0].group[1].div_16[1]" locked="true">
                         <Aliases>
                             <Alias value="CYBSP_DEBUG_UART_CLK_DIV"/>
                         </Aliases>
                     </Block>
                     <Parameters>
-                        <Param id="fracDivider" value="0"/>
                         <Param id="intDivider" value="87"/>
                         <Param id="startOnReset" value="true"/>
                     </Parameters>
                 </Personality>
-                <Personality template="pclk_v2" version="1.0" instance="h1jyRfliPco">
+                <Personality template="pclk_v2" version="1.1" instance="h1jyRfliPco">
                     <Block location="peri[0].group[1].div_16[2]" locked="true">
                         <Aliases>
                             <Alias value="CYBSP_GENERAL_PURPOSE_TIMER_CLK_DIV"/>
                         </Aliases>
                     </Block>
                     <Parameters>
-                        <Param id="fracDivider" value="0"/>
                         <Param id="intDivider" value="10000"/>
                         <Param id="startOnReset" value="true"/>
                     </Parameters>
                 </Personality>
-                <Personality template="pclk_v2" version="1.0" instance="38UMBOxuje4">
+                <Personality template="pclk_v2" version="1.1" instance="38UMBOxuje4">
                     <Block location="peri[0].group[1].div_16[3]" locked="true">
                         <Aliases>
                             <Alias value="CYBSP_PWM_LED_CTRL_CLK_DIV"/>
                         </Aliases>
                     </Block>
                     <Parameters>
-                        <Param id="fracDivider" value="0"/>
                         <Param id="intDivider" value="50000"/>
                         <Param id="startOnReset" value="true"/>
                     </Parameters>
                 </Personality>
-                <Personality template="pclk_v2" version="1.0" instance="WOOQVPnOl_Y">
+                <Personality template="pclk_v2" version="1.1" instance="WOOQVPnOl_Y">
                     <Block location="peri[0].group[1].div_16_5[0]" locked="true">
                         <Aliases>
                             <Alias value="CYBSP_BT_UART_CLK_DIV"/>
@@ -2449,7 +2247,7 @@
                         <Param id="startOnReset" value="true"/>
                     </Parameters>
                 </Personality>
-                <Personality template="pclk_v2" version="1.0" instance="vy6xFOXZU08">
+                <Personality template="pclk_v2" version="1.1" instance="vy6xFOXZU08">
                     <Block location="peri[0].group[1].div_16_5[1]" locked="true">
                         <Aliases>
                             <Alias value="CYBSP_SMARTIO_PWM_CLK_DIV"/>
@@ -2461,7 +2259,7 @@
                         <Param id="startOnReset" value="true"/>
                     </Parameters>
                 </Personality>
-                <Personality template="pclk_v2" version="1.0" instance="5zaI3-vQKc0">
+                <Personality template="pclk_v2" version="1.1" instance="5zaI3-vQKc0">
                     <Block location="peri[0].group[1].div_24_5[0]" locked="true">
                         <Aliases>
                             <Alias value="CYBSP_SMART_IO_CLK_DIV"/>
@@ -2473,7 +2271,7 @@
                         <Param id="startOnReset" value="true"/>
                     </Parameters>
                 </Personality>
-                <Personality template="pclk_v2" version="1.0" instance="ZAMc4kFrGAg">
+                <Personality template="pclk_v2" version="1.1" instance="ZAMc4kFrGAg">
                     <Block location="peri[0].group[7].div_16_5[0]" locked="true">
                         <Aliases>
                             <Alias value="CYBSP_TRACE_CLK_DIV"/>
@@ -2485,19 +2283,28 @@
                         <Param id="startOnReset" value="true"/>
                     </Parameters>
                 </Personality>
-                <Personality template="mmio" version="1.0" instance="fZVxHvxlSOk">
+                <Personality template="pclk_v2" version="1.1" instance="1uBmbxjOkWE">
+                    <Block location="peri[0].group[9].div_8[0]" locked="true">
+                        <Aliases>
+                            <Alias value="CYBSP_I3C_CONTROLLER_CLK_DIV"/>
+                        </Aliases>
+                    </Block>
+                    <Parameters>
+                        <Param id="intDivider" value="8"/>
+                        <Param id="startOnReset" value="true"/>
+                    </Parameters>
+                </Personality>
+                <Personality template="mmio" version="1.1" instance="fZVxHvxlSOk">
                     <Block location="peri[0].mmio[0]" locked="true"/>
                     <Parameters>
                         <Param id="divider2" value="2"/>
-                        <Param id="dividerEnabled0" value="false"/>
                         <Param id="dividerEnabled1" value="false"/>
                         <Param id="dividerEnabled2" value="true"/>
                         <Param id="dividerEnabled3" value="false"/>
-                        <Param id="dividerEnabled4" value="false"/>
                         <Param id="dividerEnabled5" value="false"/>
                     </Parameters>
                 </Personality>
-                <Personality template="pclk_v2" version="1.0" instance="XwpX8Wr_koo">
+                <Personality template="pclk_v2" version="1.1" instance="XwpX8Wr_koo">
                     <Block location="peri[1].group[1].div_16_5[0]" locked="true">
                         <Aliases>
                             <Alias value="CYBSP_TDM_CONTROLLER_0_CLK_DIV"/>
@@ -2509,7 +2316,7 @@
                         <Param id="startOnReset" value="true"/>
                     </Parameters>
                 </Personality>
-                <Personality template="pclk_v2" version="1.0" instance="1Pj3A_gzNQ4">
+                <Personality template="pclk_v2" version="1.1" instance="1Pj3A_gzNQ4">
                     <Block location="peri[1].group[1].div_16_5[1]" locked="true">
                         <Aliases>
                             <Alias value="CYBSP_PDM_CLK_DIV"/>
@@ -2521,40 +2328,35 @@
                         <Param id="startOnReset" value="true"/>
                     </Parameters>
                 </Personality>
-                <Personality template="pclk_v2" version="1.0" instance="d9AiDHtoEjA">
+                <Personality template="pclk_v2" version="1.1" instance="d9AiDHtoEjA">
                     <Block location="peri[1].group[2].div_8[0]" locked="true">
                         <Aliases>
                             <Alias value="CYBSP_SDHC_0_CLK_DIV"/>
                         </Aliases>
                     </Block>
                     <Parameters>
-                        <Param id="fracDivider" value="0"/>
                         <Param id="intDivider" value="2"/>
                         <Param id="startOnReset" value="true"/>
                     </Parameters>
                 </Personality>
-                <Personality template="pclk_v2" version="1.0" instance="n5v5kTyDdg0">
+                <Personality template="pclk_v2" version="1.1" instance="n5v5kTyDdg0">
                     <Block location="peri[1].group[3].div_8[0]" locked="true">
                         <Aliases>
                             <Alias value="CYBSP_SDHC_1_CLK_DIV"/>
                         </Aliases>
                     </Block>
                     <Parameters>
-                        <Param id="fracDivider" value="0"/>
                         <Param id="intDivider" value="2"/>
                         <Param id="startOnReset" value="true"/>
                     </Parameters>
                 </Personality>
-                <Personality template="mmio" version="1.0" instance="UUwTfYwsYSw">
+                <Personality template="mmio" version="1.1" instance="UUwTfYwsYSw">
                     <Block location="peri[1].mmio[0]" locked="true"/>
                     <Parameters>
                         <Param id="divider1" value="2"/>
                         <Param id="divider3" value="4"/>
-                        <Param id="dividerEnabled0" value="false"/>
                         <Param id="dividerEnabled1" value="true"/>
-                        <Param id="dividerEnabled2" value="false"/>
                         <Param id="dividerEnabled3" value="true"/>
-                        <Param id="dividerEnabled4" value="false"/>
                     </Parameters>
                 </Personality>
                 <Personality template="i2c" version="4.0" instance="Z-0WSjZHSXQ">
@@ -2704,7 +2506,7 @@
                         <Param id="inFlash" value="true"/>
                     </Parameters>
                 </Personality>
-                <Personality template="spi" version="3.0" instance="8iOzcbEhBQI">
+                <Personality template="spi" version="3.0" instance="qSHXa0QwcSk">
                     <Block location="scb[6]" locked="true">
                         <Aliases>
                             <Alias value="SGPIO_TARGET_SPI"/>
@@ -2876,9 +2678,6 @@
                         <Param id="use_dll" value="false"/>
                     </Parameters>
                 </Personality>
-                <Personality template="sysclocks" version="3.0" instance="eS2EnHWwepc">
-                    <Block location="srss[0].clock[0]" locked="true"/>
-                </Personality>
                 <Personality template="bakclk" version="3.0" instance="BEdPR4F59xg">
                     <Block location="srss[0].clock[0].bakclk[0]" locked="true"/>
                     <Parameters>
@@ -3030,15 +2829,13 @@
                     <Block location="srss[0].clock[0].lfclk[0]" locked="true"/>
                     <Parameters>
                         <Param id="ClkLfCsv" value="false"/>
-                        <Param id="accuracyCsv" value="99"/>
                         <Param id="sourceClock" value="pilo"/>
-                        <Param id="sourceClockCsv" value="IMO"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pathmux" version="3.0" instance="02SXcT-qcc4">
                     <Block location="srss[0].clock[0].pathmux[0]" locked="true"/>
                     <Parameters>
-                        <Param id="sourceClock" value="eco"/>
+                        <Param id="sourceClock" value="ext"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pathmux" version="3.0" instance="ToxN072EyPU">
@@ -3050,7 +2847,7 @@
                 <Personality template="pathmux" version="3.0" instance="X-ZUHIcDn5E">
                     <Block location="srss[0].clock[0].pathmux[2]" locked="true"/>
                     <Parameters>
-                        <Param id="sourceClock" value="eco"/>
+                        <Param id="sourceClock" value="iho"/>
                     </Parameters>
                 </Personality>
                 <Personality template="pathmux" version="3.0" instance="I5nqg21Rclw">
@@ -3102,11 +2899,8 @@
                     <Block location="srss[0].clock[0].wco[0]" locked="true"/>
                     <Parameters>
                         <Param id="accuracyPpm" value="150"/>
-                        <Param id="clockLostDetection" value="false"/>
                         <Param id="clockPort" value="CY_SYSCLK_WCO_NOT_BYPASSED"/>
-                        <Param id="clockSupervisor" value="CY_SYSCLK_WCO_CSV_SUPERVISOR_ILO"/>
-                        <Param id="lossAction" value="CY_SYSCLK_CSV_ERROR_FAULT"/>
-                        <Param id="lossWindow" value="CY_SYSCLK_CSV_LOSS_4_CYCLES"/>
+                        <Param id="extOscillator" value="WCO"/>
                     </Parameters>
                 </Personality>
                 <Personality template="mcwdt" version="3.0" instance="mvym-rkCo3g">
@@ -3157,7 +2951,7 @@
                         <Param id="inFlash" value="true"/>
                     </Parameters>
                 </Personality>
-                <Personality template="power_v4" version="1.0" instance="lMGDNnoZghg">
+                <Personality template="power_v4" version="1.1" instance="lMGDNnoZghg">
                     <Block location="srss[0].power[0]" locked="true"/>
                     <Parameters>
                         <Param id="actPwrMode" value="POWER_PROFILE_HP"/>
@@ -3474,6 +3268,7 @@
                     <Parameters>
                         <Param id="mode" value="Device"/>
                         <Param id="timerEnable" value="true"/>
+                        <Param id="usbCounter#inFlash" value="false"/>
                         <Param id="usbCounter#usbCounter" value="AUTOPLACEDtcpwm[0].group[0].cnt[1]"/>
                     </Parameters>
                     <Personality template="usbCounter" instance="jZetNzFzV3U">
@@ -3482,9 +3277,6 @@
                                 <Alias value="CYBSP_USB_OS_TIMER_COUNTER"/>
                             </Aliases>
                         </Block>
-                        <Parameters>
-                            <Param id="inFlash" value="false"/>
-                        </Parameters>
                     </Personality>
                 </Personality>
                 <Personality template="memory" version="2.0" instance="6N2tM2roWpA">
@@ -3493,7 +3285,7 @@
                 <Personality template="memory_region_data" version="1.0" instance="gK7uMQyE6U8">
                     <Block location="vres[0].memory_region_data[0]" locked="true"/>
                     <Parameters>
-                        <Param id="description" value="m55_data"/>
+                        <Param id="description" value="CM55 data region"/>
                         <Param id="domain" value="P8kQl2DRYUQ"/>
                         <Param id="memoryId" value="CM55_DTCM_INTERNAL"/>
                         <Param id="offset" value="0x00000000"/>
@@ -3505,7 +3297,7 @@
                 <Personality template="memory_region_data" version="1.0" instance="6UdxrJqEEpY">
                     <Block location="vres[0].memory_region_data[1]" locked="true"/>
                     <Parameters>
-                        <Param id="description" value="m55_code"/>
+                        <Param id="description" value="CM55 code region"/>
                         <Param id="domain" value="P8kQl2DRYUQ"/>
                         <Param id="memoryId" value="CM55_ITCM_INTERNAL"/>
                         <Param id="offset" value="0x00000000"/>
@@ -3517,13 +3309,13 @@
                 <Personality template="memory_region_data" version="1.0" instance="HBtxZcivWLg">
                     <Block location="vres[0].memory_region_data[2]" locked="true"/>
                     <Parameters>
-                        <Param id="description" value="user_programmable"/>
+                        <Param id="description" value="CM33 secure user programmable region"/>
                         <Param id="domain" value="7cPl230VJyc"/>
                         <Param id="memoryId" value="RRAM"/>
                         <Param id="offset" value="0x00011000"/>
                         <Param id="regionId" value="user_programmable"/>
                         <Param id="reservedGuid" value="USER_DEFINED"/>
-                        <Param id="size" value="0x00028000"/>
+                        <Param id="size" value="0x00020000"/>
                     </Parameters>
                 </Personality>
                 <Personality template="memory_region_data" version="1.0" instance="odLZVCjJ5gk">
@@ -3541,19 +3333,19 @@
                 <Personality template="memory_region_data" version="1.0" instance="E4AA7qidweI">
                     <Block location="vres[0].memory_region_data[4]" locked="true"/>
                     <Parameters>
-                        <Param id="description" value="m33s_nvm"/>
+                        <Param id="description" value="CM33 secure image including non-secure callable region"/>
                         <Param id="domain" value="7cPl230VJyc"/>
                         <Param id="memoryId" value="SMIF0MEM1"/>
                         <Param id="offset" value="0x00100000"/>
                         <Param id="regionId" value="m33s_nvm"/>
                         <Param id="reservedGuid" value="USER_DEFINED"/>
-                        <Param id="size" value="0x001E0000"/>
+                        <Param id="size" value="0x00200000"/>
                     </Parameters>
                 </Personality>
                 <Personality template="memory_region_data" version="1.0" instance="H3hGbFz8Y-0">
                     <Block location="vres[0].memory_region_data[5]" locked="true"/>
                     <Parameters>
-                        <Param id="description" value="m33_nvm"/>
+                        <Param id="description" value="CM33 image"/>
                         <Param id="domain" value="Xo07Phg6oz8"/>
                         <Param id="memoryId" value="SMIF0MEM1"/>
                         <Param id="offset" value="0x00340000"/>
@@ -3565,7 +3357,7 @@
                 <Personality template="memory_region_data" version="1.0" instance="Qg-VSbBkSUE">
                     <Block location="vres[0].memory_region_data[6]" locked="true"/>
                     <Parameters>
-                        <Param id="description" value="m55_nvm"/>
+                        <Param id="description" value="CM55 image"/>
                         <Param id="domain" value="P8kQl2DRYUQ"/>
                         <Param id="memoryId" value="SMIF0MEM1"/>
                         <Param id="offset" value="0x00580000"/>
@@ -3577,7 +3369,7 @@
                 <Personality template="memory_region_data" version="1.0" instance="CehRmLIVyTc">
                     <Block location="vres[0].memory_region_data[7]" locked="true"/>
                     <Parameters>
-                        <Param id="description" value="m55_code_secondary"/>
+                        <Param id="description" value="CM55 code region"/>
                         <Param id="domain" value="P8kQl2DRYUQ"/>
                         <Param id="memoryId" value="SOCMEM_RAM"/>
                         <Param id="offset" value="0x00000000"/>
@@ -3589,22 +3381,22 @@
                 <Personality template="memory_region_data" version="1.0" instance="TWsfKGTYGkQ">
                     <Block location="vres[0].memory_region_data[8]" locked="true"/>
                     <Parameters>
-                        <Param id="description" value="m55_data_secondary"/>
-                        <Param id="domain" value="P8kQl2DRYUQ"/>
+                        <Param id="description" value="CM55 data region"/>
+                        <Param id="domain" value="Rj_rAX1eb8U"/>
                         <Param id="memoryId" value="SOCMEM_RAM"/>
                         <Param id="offset" value="0x00040000"/>
                         <Param id="regionId" value="m55_data_secondary"/>
                         <Param id="reservedGuid" value="USER_DEFINED"/>
-                        <Param id="size" value="0x002BE000"/>
+                        <Param id="size" value="0x002BC000"/>
                     </Parameters>
                 </Personality>
                 <Personality template="memory_region_data" version="1.0" instance="0zJXEr6pka4">
                     <Block location="vres[0].memory_region_data[9]" locked="true"/>
                     <Parameters>
-                        <Param id="description" value="m33_m55_shared"/>
+                        <Param id="description" value="Shared region between CM33 and CM55"/>
                         <Param id="domain" value="Rj_rAX1eb8U"/>
                         <Param id="memoryId" value="SOCMEM_RAM"/>
-                        <Param id="offset" value="0x002FE000"/>
+                        <Param id="offset" value="0x002FC000"/>
                         <Param id="regionId" value="m33_m55_shared"/>
                         <Param id="reservedGuid" value="USER_DEFINED"/>
                         <Param id="size" value="0x00040000"/>
@@ -3613,19 +3405,19 @@
                 <Personality template="memory_region_data" version="1.0" instance="aC-gUJLSBI4">
                     <Block location="vres[0].memory_region_data[10]" locked="true"/>
                     <Parameters>
-                        <Param id="description" value="gfx_mem"/>
+                        <Param id="description" value="Graphics data"/>
                         <Param id="domain" value="Rj_rAX1eb8U"/>
                         <Param id="memoryId" value="SOCMEM_RAM"/>
-                        <Param id="offset" value="0x0033E000"/>
+                        <Param id="offset" value="0x0033C000"/>
                         <Param id="regionId" value="gfx_mem"/>
                         <Param id="reservedGuid" value="USER_DEFINED"/>
-                        <Param id="size" value="0x001C2000"/>
+                        <Param id="size" value="0x001C4000"/>
                     </Parameters>
                 </Personality>
                 <Personality template="memory_region_data" version="1.0" instance="_Hf5ER1SoPM">
                     <Block location="vres[0].memory_region_data[11]" locked="true"/>
                     <Parameters>
-                        <Param id="description" value="m33s_shared"/>
+                        <Param id="description" value="Shared region between CM33 secure project and secure enclave"/>
                         <Param id="domain" value="7cPl230VJyc"/>
                         <Param id="memoryId" value="SRAM"/>
                         <Param id="offset" value="0x00001000"/>
@@ -3637,7 +3429,7 @@
                 <Personality template="memory_region_data" version="1.0" instance="I4EcDdFsBYc">
                     <Block location="vres[0].memory_region_data[12]" locked="true"/>
                     <Parameters>
-                        <Param id="description" value="m33s_code"/>
+                        <Param id="description" value="CM33 secure code region"/>
                         <Param id="domain" value="7cPl230VJyc"/>
                         <Param id="memoryId" value="SRAM"/>
                         <Param id="offset" value="0x00002000"/>
@@ -3649,7 +3441,7 @@
                 <Personality template="memory_region_data" version="1.0" instance="ddkQGS-VO4I">
                     <Block location="vres[0].memory_region_data[13]" locked="true"/>
                     <Parameters>
-                        <Param id="description" value="m33s_data"/>
+                        <Param id="description" value="CM33 secure data region"/>
                         <Param id="domain" value="7cPl230VJyc"/>
                         <Param id="memoryId" value="SRAM"/>
                         <Param id="offset" value="0x00037000"/>
@@ -3658,22 +3450,10 @@
                         <Param id="size" value="0x00021000"/>
                     </Parameters>
                 </Personality>
-                <Personality template="memory_region_data" version="1.0" instance="czBN_vuIMt0">
+                <Personality template="memory_region_data" version="1.0" instance="0-n6OQnErF0">
                     <Block location="vres[0].memory_region_data[14]" locked="true"/>
                     <Parameters>
-                        <Param id="description" value="m33_nsc"/>
-                        <Param id="domain" value="GI9riTKd7DI"/>
-                        <Param id="memoryId" value="SMIF0MEM1"/>
-                        <Param id="offset" value="0x002E0000"/>
-                        <Param id="regionId" value="m33_nsc"/>
-                        <Param id="reservedGuid" value="USER_DEFINED"/>
-                        <Param id="size" value="0x00020000"/>
-                    </Parameters>
-                </Personality>
-                <Personality template="memory_region_data" version="1.0" instance="0-n6OQnErF0">
-                    <Block location="vres[0].memory_region_data[15]" locked="true"/>
-                    <Parameters>
-                        <Param id="description" value="m33_code"/>
+                        <Param id="description" value="CM33 code region"/>
                         <Param id="domain" value="Xo07Phg6oz8"/>
                         <Param id="memoryId" value="SRAM"/>
                         <Param id="offset" value="0x00058000"/>
@@ -3683,9 +3463,9 @@
                     </Parameters>
                 </Personality>
                 <Personality template="memory_region_data" version="1.0" instance="rF4o_hNHwc0">
-                    <Block location="vres[0].memory_region_data[16]" locked="true"/>
+                    <Block location="vres[0].memory_region_data[15]" locked="true"/>
                     <Parameters>
-                        <Param id="description" value="m33_data"/>
+                        <Param id="description" value="CM33 data region"/>
                         <Param id="domain" value="Rj_rAX1eb8U"/>
                         <Param id="memoryId" value="SRAM"/>
                         <Param id="offset" value="0x000BD000"/>
@@ -3695,9 +3475,9 @@
                     </Parameters>
                 </Personality>
                 <Personality template="memory_region_data" version="1.0" instance="DhUV7mLaCmM">
-                    <Block location="vres[0].memory_region_data[17]" locked="true"/>
+                    <Block location="vres[0].memory_region_data[16]" locked="true"/>
                     <Parameters>
-                        <Param id="description" value="m33s_allocatable_shared"/>
+                        <Param id="description" value="CM33 secure shared region"/>
                         <Param id="domain" value="Rj_rAX1eb8U"/>
                         <Param id="memoryId" value="SRAM"/>
                         <Param id="offset" value="0x000FD000"/>
@@ -3707,9 +3487,9 @@
                     </Parameters>
                 </Personality>
                 <Personality template="memory_region_data" version="1.0" instance="mBBWdCYdOhU">
-                    <Block location="vres[0].memory_region_data[18]" locked="true"/>
+                    <Block location="vres[0].memory_region_data[17]" locked="true"/>
                     <Parameters>
-                        <Param id="description" value="m33_allocatable_shared"/>
+                        <Param id="description" value="CM33 shared region"/>
                         <Param id="domain" value="Rj_rAX1eb8U"/>
                         <Param id="memoryId" value="SRAM"/>
                         <Param id="offset" value="0x000FE000"/>
@@ -3719,9 +3499,9 @@
                     </Parameters>
                 </Personality>
                 <Personality template="memory_region_data" version="1.0" instance="SSEo_lVrya4">
-                    <Block location="vres[0].memory_region_data[19]" locked="true"/>
+                    <Block location="vres[0].memory_region_data[18]" locked="true"/>
                     <Parameters>
-                        <Param id="description" value="m55_allocatable_shared"/>
+                        <Param id="description" value="CM55 shared region"/>
                         <Param id="domain" value="Rj_rAX1eb8U"/>
                         <Param id="memoryId" value="SRAM"/>
                         <Param id="offset" value="0x000FF000"/>
@@ -3731,7 +3511,7 @@
                     </Parameters>
                 </Personality>
                 <Personality template="memory_region_data" version="1.0" instance="zbDxvcj0isQ">
-                    <Block location="vres[0].memory_region_data[20]" locked="true"/>
+                    <Block location="vres[0].memory_region_data[19]" locked="true"/>
                     <Parameters>
                         <Param id="description" value=""/>
                         <Param id="domain" value="kTqxq_31FkI"/>
@@ -3743,9 +3523,9 @@
                     </Parameters>
                 </Personality>
                 <Personality template="memory_region_data" version="1.0" instance="-MT7MKHTwQU">
-                    <Block location="vres[0].memory_region_data[21]" locked="true"/>
+                    <Block location="vres[0].memory_region_data[20]" locked="true"/>
                     <Parameters>
-                        <Param id="description" value="m33s_trailer"/>
+                        <Param id="description" value="CM33 secure trailer"/>
                         <Param id="domain" value="7cPl230VJyc"/>
                         <Param id="memoryId" value="SMIF0MEM1"/>
                         <Param id="offset" value="0x00300000"/>
@@ -3755,9 +3535,9 @@
                     </Parameters>
                 </Personality>
                 <Personality template="memory_region_data" version="1.0" instance="RBhLi_tXi6k">
-                    <Block location="vres[0].memory_region_data[22]" locked="true"/>
+                    <Block location="vres[0].memory_region_data[21]" locked="true"/>
                     <Parameters>
-                        <Param id="description" value="m33_trailer"/>
+                        <Param id="description" value="CM33 trailer"/>
                         <Param id="domain" value="Xo07Phg6oz8"/>
                         <Param id="memoryId" value="SMIF0MEM1"/>
                         <Param id="offset" value="0x00540000"/>
@@ -3767,9 +3547,9 @@
                     </Parameters>
                 </Personality>
                 <Personality template="memory_region_data" version="1.0" instance="f0P-r6gRLcw">
-                    <Block location="vres[0].memory_region_data[23]" locked="true"/>
+                    <Block location="vres[0].memory_region_data[22]" locked="true"/>
                     <Parameters>
-                        <Param id="description" value="m55_trailer"/>
+                        <Param id="description" value="CM55 trailer"/>
                         <Param id="domain" value="P8kQl2DRYUQ"/>
                         <Param id="memoryId" value="SMIF0MEM1"/>
                         <Param id="offset" value="0x00840000"/>
@@ -3779,7 +3559,7 @@
                     </Parameters>
                 </Personality>
                 <Personality template="memory_region_data" version="1.0" instance="hin4bsvVyHI">
-                    <Block location="vres[0].memory_region_data[24]" locked="true"/>
+                    <Block location="vres[0].memory_region_data[23]" locked="true"/>
                     <Parameters>
                         <Param id="description" value=""/>
                         <Param id="domain" value="kTqxq_31FkI"/>
@@ -3790,10 +3570,25 @@
                         <Param id="size" value="0x00001000"/>
                     </Parameters>
                 </Personality>
+                <Personality template="memory_region_data" version="1.0" instance="YmGS5xeh19E">
+                    <Block location="vres[0].memory_region_data[24]" locked="true"/>
+                    <Parameters>
+                        <Param id="description" value="CM33 non-secure and CM55 user programmable region"/>
+                        <Param id="domain" value="Rj_rAX1eb8U"/>
+                        <Param id="memoryId" value="RRAM"/>
+                        <Param id="offset" value="0x00031000"/>
+                        <Param id="regionId" value="user_nvm"/>
+                        <Param id="reservedGuid" value="USER_DEFINED"/>
+                        <Param id="size" value="0x00008000"/>
+                    </Parameters>
+                </Personality>
                 <Personality template="protection" version="1.0" instance="lyICW4XqF-w">
                     <Block location="vres[0].protection[0]" locked="true"/>
                     <Parameters>
-                        <Param id="type" value="SECURE_CUSTOM"/>
+                        <Param id="pcSwitch" value="false"/>
+                        <Param id="secureDebuggerAccess" value="true"/>
+                        <Param id="type" value="NON_SECURE"/>
+                        <Param id="validation_security_boundary" value="SECURE"/>
                     </Parameters>
                     <Personality template="domain0" instance="7cPl230VJyc">
                         <Block location="vres[0].protection[0].domain[0]" locked="false">
@@ -3841,16 +3636,32 @@
                 <Personality template="protection_mpc" version="1.0" instance="VVG3pZNy_Zc">
                     <Block location="vres[0].protection[0].mpc[0]" locked="true"/>
                     <Parameters>
-                        <Param id="response0" value="CY_MPC_BUS_ERR"/>
-                        <Param id="response1" value="CY_MPC_BUS_ERR"/>
-                        <Param id="response2" value="CY_MPC_BUS_ERR"/>
-                        <Param id="response3" value="CY_MPC_BUS_ERR"/>
-                        <Param id="response4" value="CY_MPC_BUS_ERR"/>
-                        <Param id="response5" value="CY_MPC_BUS_ERR"/>
+                        <Param id="responsePPCASRAM0" value="CY_MPC_BUS_ERR"/>
+                        <Param id="responsePPCASRAM1" value="CY_MPC_BUS_ERR"/>
+                        <Param id="responsePPCASRAM2" value="CY_MPC_BUS_ERR"/>
+                        <Param id="responsePPCASRAM3" value="CY_MPC_BUS_ERR"/>
+                        <Param id="responsePPCASRAM4" value="CY_MPC_BUS_ERR"/>
+                        <Param id="responsePROMC" value="CY_MPC_BUS_ERR"/>
+                        <Param id="responseSMIF0" value="CY_MPC_BUS_ERR"/>
+                        <Param id="responseSOCMEM" value="CY_MPC_BUS_ERR"/>
+                        <Param id="responseSRAM0" value="CY_MPC_BUS_ERR"/>
+                        <Param id="responseSRAM1" value="CY_MPC_BUS_ERR"/>
                     </Parameters>
                 </Personality>
             </BlockConfig>
             <Netlist>
+                <Net>
+                    <Port name="i3c[0].clock_i3c_en[0]"/>
+                    <Port name="peri[0].group[9].div_8[0].clk[0]"/>
+                </Net>
+                <Net>
+                    <Port name="i3c[0].i3c_scl[0]"/>
+                    <Port name="ioss[0].port[3].pin[0].digital_inout[0]"/>
+                </Net>
+                <Net>
+                    <Port name="i3c[0].i3c_sda[0]"/>
+                    <Port name="ioss[0].port[3].pin[1].digital_inout[0]"/>
+                </Net>
                 <Net>
                     <Port name="ioss[0].port[0].pin[1].digital_out[0]"/>
                     <Port name="smif[1].core[0].spihb_select2[0]"/>
@@ -4108,10 +3919,6 @@
                     <Port name="scb[10].tr_tx_req[0]"/>
                 </Net>
                 <Net>
-                    <Port name="pass[0].clk_hf[0]"/>
-                    <Port name="srss[0].clock[0].hfclk[9].root_clk[0]"/>
-                </Net>
-                <Net>
                     <Port name="pdm[0].clk_if_srss[0]"/>
                     <Port name="peri[1].group[1].div_16_5[1].clk[0]"/>
                 </Net>
@@ -4148,6 +3955,14 @@
                     <Port name="tcpwm[0].group[0].cnt[1].clock_counter_en[0]"/>
                 </Net>
                 <Net>
+                    <Port name="peri[0].group[9].div_8[0].clk_pclk_root[0]"/>
+                    <Port name="srss[0].clock[0].hfclk[13].root_clk[0]"/>
+                </Net>
+                <Net>
+                    <Port name="peri[0].mmio[0].clk_pclk_root[3]"/>
+                    <Port name="srss[0].clock[0].hfclk[11].root_clk[0]"/>
+                </Net>
+                <Net>
                     <Port name="peri[1].group[1].div_16_5[0].clk[0]"/>
                     <Port name="tdm[0].tdm[0].clk_if_srss[0]"/>
                 </Net>
@@ -4156,8 +3971,16 @@
                     <Port name="sdhc[0].clk_hf[0]"/>
                 </Net>
                 <Net>
+                    <Port name="peri[1].group[2].div_8[0].clk_pclk_root[0]"/>
+                    <Port name="srss[0].clock[0].hfclk[5].root_clk[0]"/>
+                </Net>
+                <Net>
                     <Port name="peri[1].group[3].div_8[0].clk[0]"/>
                     <Port name="sdhc[1].clk_hf[0]"/>
+                </Net>
+                <Net>
+                    <Port name="peri[1].group[3].div_8[0].clk_pclk_root[0]"/>
+                    <Port name="srss[0].clock[0].hfclk[6].root_clk[0]"/>
                 </Net>
                 <Net>
                     <Port name="smif[0].core[0].clk_pll_normal[0]"/>
@@ -4166,10 +3989,6 @@
                 <Net>
                     <Port name="smif[1].core[0].clk_pll_normal[0]"/>
                     <Port name="srss[0].clock[0].hfclk[4].root_clk[0]"/>
-                </Net>
-                <Net>
-                    <Port name="srss[0].clock[0].hfclk[1].root_clk[0]"/>
-                    <Port name="usbhs[0].mmio_clk_hf[0]"/>
                 </Net>
                 <Net>
                     <Port name="srss[0].clock[0].hfclk[8].root_clk[0]"/>
@@ -4181,9 +4000,50 @@
                     <Port name="scb[10].clock_scb_en[0]"/>
                 </Net>
                 <Net>
+                    <Port name="pass[0].clk_hf[0]"/>
+                    <Port name="peri[0].mmio[0].clk_pclk_root[5]"/>
+                    <Port name="srss[0].clock[0].hfclk[9].root_clk[0]"/>
+                </Net>
+                <Net>
                     <Port name="peri[0].group[1].div_8[3].clk[0]"/>
                     <Port name="scb[6].clock_scb_en[0]"/>
                     <Port name="tcpwm[0].group[0].cnt[7].clock_counter_en[0]"/>
+                </Net>
+                <Net>
+                    <Port name="peri[1].group[1].div_16_5[0].clk_pclk_root[0]"/>
+                    <Port name="peri[1].group[1].div_16_5[1].clk_pclk_root[0]"/>
+                    <Port name="srss[0].clock[0].hfclk[7].root_clk[0]"/>
+                </Net>
+                <Net>
+                    <Port name="peri[0].group[7].div_16_5[0].clk_pclk_root[0]"/>
+                    <Port name="peri[0].mmio[0].clk_pclk_root[0]"/>
+                    <Port name="peri[0].mmio[0].clk_pclk_root[2]"/>
+                    <Port name="peri[0].mmio[0].clk_pclk_root[4]"/>
+                    <Port name="srss[0].clock[0].hfclk[0].root_clk[0]"/>
+                </Net>
+                <Net>
+                    <Port name="peri[1].mmio[0].clk_pclk_root[0]"/>
+                    <Port name="peri[1].mmio[0].clk_pclk_root[1]"/>
+                    <Port name="peri[1].mmio[0].clk_pclk_root[2]"/>
+                    <Port name="peri[1].mmio[0].clk_pclk_root[3]"/>
+                    <Port name="peri[1].mmio[0].clk_pclk_root[4]"/>
+                    <Port name="srss[0].clock[0].hfclk[1].root_clk[0]"/>
+                    <Port name="usbhs[0].mmio_clk_hf[0]"/>
+                </Net>
+                <Net>
+                    <Port name="peri[0].group[1].div_16[0].clk_pclk_root[0]"/>
+                    <Port name="peri[0].group[1].div_16[1].clk_pclk_root[0]"/>
+                    <Port name="peri[0].group[1].div_16[2].clk_pclk_root[0]"/>
+                    <Port name="peri[0].group[1].div_16[3].clk_pclk_root[0]"/>
+                    <Port name="peri[0].group[1].div_16_5[0].clk_pclk_root[0]"/>
+                    <Port name="peri[0].group[1].div_16_5[1].clk_pclk_root[0]"/>
+                    <Port name="peri[0].group[1].div_24_5[0].clk_pclk_root[0]"/>
+                    <Port name="peri[0].group[1].div_8[0].clk_pclk_root[0]"/>
+                    <Port name="peri[0].group[1].div_8[1].clk_pclk_root[0]"/>
+                    <Port name="peri[0].group[1].div_8[2].clk_pclk_root[0]"/>
+                    <Port name="peri[0].group[1].div_8[3].clk_pclk_root[0]"/>
+                    <Port name="peri[0].mmio[0].clk_pclk_root[1]"/>
+                    <Port name="srss[0].clock[0].hfclk[10].root_clk[0]"/>
                 </Net>
             </Netlist>
         </Device>
